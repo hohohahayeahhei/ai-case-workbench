@@ -1,0 +1,71 @@
+[
+  {
+    "case_id": "demo_case_001",
+    "title_original": "示例：客服团队用 AI 助手缩短知识检索时间",
+    "source_url": "https://example.com/cases/customer-support-ai",
+    "source_type": "official_case",
+    "published_at": "2026-09-08",
+    "problem": {
+      "claim": "客服需要在多个文档中查找处理步骤",
+      "evidence": "原文说明客服需要跨多个知识页面检索信息。"
+    },
+    "approach": {
+      "claim": "使用带检索能力的 AI 助手返回相关知识片段",
+      "evidence": "原文说明系统先检索内部知识，再生成带来源的回答。"
+    },
+    "outcome": {
+      "claim": "减少了重复查找步骤",
+      "evidence": "原文描述检索步骤减少，但没有给出具体百分比。"
+    },
+    "limitations": [
+      "样本规模和长期效果未披露"
+    ],
+    "expected_label": "pass"
+  },
+  {
+    "case_id": "demo_case_002",
+    "title_original": "示例：某平台宣称 AI 让效率提升 300%",
+    "source_url": "https://example.com/marketing/efficiency-300",
+    "source_type": "marketing",
+    "published_at": "2026-09-08",
+    "problem": {
+      "claim": "团队希望提高工作效率",
+      "evidence": "页面只有宣传性描述。"
+    },
+    "approach": {
+      "claim": "接入 AI 自动化功能",
+      "evidence": "页面提到“智能化升级”，没有具体实现说明。"
+    },
+    "outcome": {
+      "claim": "效率提升 300%",
+      "evidence": "页面没有实验口径、样本或计算方式。"
+    },
+    "limitations": [
+      "数字缺少可验证出处"
+    ],
+    "expected_label": "reject_unsupported_metric"
+  },
+  {
+    "case_id": "demo_case_003",
+    "title_original": "示例：客服团队用 AI 助手缩短知识检索时间",
+    "source_url": "https://example.com/cases/customer-support-ai?utm_source=feed",
+    "source_type": "blog",
+    "published_at": "2026-09-07",
+    "problem": {
+      "claim": "客服需要在多个文档中查找处理步骤",
+      "evidence": "内容与 demo_case_001 相同。"
+    },
+    "approach": {
+      "claim": "使用带检索能力的 AI 助手",
+      "evidence": "内容与 demo_case_001 相同。"
+    },
+    "outcome": {
+      "claim": "减少重复查找步骤",
+      "evidence": "内容与 demo_case_001 相同。"
+    },
+    "limitations": [
+      "规范化 URL 后与已有案例匹配"
+    ],
+    "expected_label": "reject_duplicate"
+  }
+]

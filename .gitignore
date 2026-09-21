@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+*.db
+.DS_Store
+
+# Runtime outputs
+data/runs/
+data/runtime/
+/data/runtime
+logs/
+frontend/node_modules/
+frontend/dist/
+
+# Personal runtime, credentials and browser/media artifacts
+data/backups/
+exports/
+backups/
+*.db-*
+*.sqlite*
+.pytest_cache/
+.codex/
+.agents/
+browser-profile*/
+douyin_media/
+*.log
+*.pem
+*.key
+cookies*.json
+storage-state*.json
+build/
+*.egg-info/

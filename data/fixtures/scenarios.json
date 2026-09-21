@@ -1,0 +1,27 @@
+[
+  {
+    "scenario_id": "happy_path",
+    "name": "完整成功链路",
+    "description": "3 条候选进入流程，1 条通过，日报冻结，同步和发布成功。"
+  },
+  {
+    "scenario_id": "evidence_gap",
+    "name": "证据不足",
+    "description": "核验 Agent 发现数字没有出处，案例进入补证或淘汰。"
+  },
+  {
+    "scenario_id": "sync_conflict",
+    "name": "知识库回读冲突",
+    "description": "写入后回读字段被改变，任务进入 sync_conflict，不能自动发布。"
+  },
+  {
+    "scenario_id": "publish_unknown",
+    "name": "发布结果未知",
+    "description": "发送请求超时，状态为 unknown，查询回执后再决定是否处理。"
+  },
+  {
+    "scenario_id": "duplicate_run",
+    "name": "重复运行",
+    "description": "相同内容版本和目标不会产生重复同步或重复发送。"
+  }
+]

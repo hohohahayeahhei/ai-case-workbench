@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.ai-case-workbench</string>
+  <key>ProgramArguments</key><array><string>/bin/bash</string><string>__PROJECT_ROOT__/scripts/start_demo.sh</string></array>
+  <key>WorkingDirectory</key><string>__PROJECT_ROOT__</string>
+  <key>EnvironmentVariables</key><dict><key>PYTHON_BIN</key><string>__PROJECT_ROOT__/.venv/bin/python</string><key>PATH</key><string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string></dict>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>__PROJECT_ROOT__/data/runtime/logs/service.out.log</string>
+  <key>StandardErrorPath</key><string>__PROJECT_ROOT__/data/runtime/logs/service.err.log</string>
+</dict></plist>

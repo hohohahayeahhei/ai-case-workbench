@@ -1,0 +1,478 @@
+[
+  {
+    "source_id": "github_blog",
+    "name": "GitHub Blog",
+    "kind": "rss",
+    "url": "https://github.blog/feed/",
+    "topics": [
+      "developer",
+      "agent",
+      "copilot",
+      "open-source"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_editorial",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "GitHub 官方博客，常有 Copilot、开发者和客户实践原文。"
+  },
+  {
+    "source_id": "huggingface_blog",
+    "name": "Hugging Face Blog",
+    "kind": "rss",
+    "url": "https://huggingface.co/blog/feed.xml",
+    "topics": [
+      "model",
+      "open-source",
+      "research"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_editorial",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "Hugging Face 官方博客，适合开源模型和工具实践。"
+  },
+  {
+    "source_id": "microsoft_research",
+    "name": "Microsoft Research",
+    "kind": "rss",
+    "url": "https://www.microsoft.com/en-us/research/feed/",
+    "topics": [
+      "agent",
+      "research",
+      "productivity"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_editorial",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "微软研究院一手研究与应用材料；案例仍需有实际使用细节。"
+  },
+  {
+    "source_id": "verified_customer_stories",
+    "name": "已核验官方案例快照",
+    "kind": "snapshot",
+    "url": "local:data/fixtures/online_cases.json",
+    "topics": [
+      "real-world-use",
+      "customer-story"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "local_verified",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": false,
+    "why": "本地已核验快照，作为离线回归数据。"
+  },
+  {
+    "source_id": "tencent_workbuddy",
+    "name": "腾讯 WorkBuddy 官方",
+    "kind": "official_site",
+    "url": "https://copilot.tencent.com/work/",
+    "alternate_urls": [
+      "https://cloud.tencent.com/product/workbuddy"
+    ],
+    "topics": [
+      "agent",
+      "办公",
+      "工作流",
+      "MCP",
+      "skills"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "腾讯 WorkBuddy 官方产品入口；优先采集官方案例与产品说明。"
+  },
+  {
+    "source_id": "deepseek_harness",
+    "name": "DeepSeek Harness 官方",
+    "kind": "official_site",
+    "url": "https://deepseek.com/harness/en/",
+    "alternate_urls": [
+      "https://github.com/deepseek-ai/deepseek-harness"
+    ],
+    "topics": [
+      "agent harness",
+      "plugin",
+      "skills",
+      "tools",
+      "scheduling"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "DeepSeek Harness 官方入口；优先采集官方文档、示例和可复现实践。"
+  },
+  {
+    "source_id": "qwenpaw",
+    "name": "QwenPaw 官方",
+    "kind": "official_site",
+    "url": "https://qwenpaw.agentscope.io/",
+    "alternate_urls": [
+      "https://github.com/agentscope-ai/QwenPaw",
+      "https://open.qianwen.com/"
+    ],
+    "topics": [
+      "personal agent",
+      "multi-agent",
+      "skills",
+      "MCP",
+      "scheduled execution"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "QwenPaw 官方入口；优先采集官方文档、示例和真实工作流。"
+  },
+  {
+    "source_id": "openai_news",
+    "name": "OpenAI News / Applied AI",
+    "kind": "official_site",
+    "url": "https://openai.com/news/",
+    "alternate_urls": [
+      "https://openai.com/customer-stories/"
+    ],
+    "topics": [
+      "agent",
+      "productivity",
+      "customer-story",
+      "applied-ai"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "OpenAI 官方新闻与客户应用入口；发布信息只有在包含真实任务与结果时才进入案例证据。"
+  },
+  {
+    "source_id": "anthropic_news",
+    "name": "Anthropic Newsroom",
+    "kind": "official_site",
+    "url": "https://www.anthropic.com/news",
+    "alternate_urls": [
+      "https://www.anthropic.com/customers"
+    ],
+    "topics": [
+      "agent",
+      "claude",
+      "enterprise",
+      "customer-story"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "Anthropic 官方新闻与客户入口；适合产品公告、客户实践和工程方法。"
+  },
+  {
+    "source_id": "google_ai_blog",
+    "name": "Google AI / Technology",
+    "kind": "official_site",
+    "url": "https://blog.google/innovation-and-ai/technology/ai/",
+    "alternate_urls": [
+      "https://blog.google/technology/ai/"
+    ],
+    "topics": [
+      "gemini",
+      "agent",
+      "research",
+      "productivity"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "Google 官方 AI 技术频道；适合产品、研究和应用案例。"
+  },
+  {
+    "source_id": "google_deepmind_blog",
+    "name": "Google DeepMind Blog",
+    "kind": "official_site",
+    "url": "https://deepmind.google/blog/",
+    "alternate_urls": [
+      "https://deepmind.google/discover/blog/"
+    ],
+    "topics": [
+      "research",
+      "agent",
+      "model",
+      "application"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "Google DeepMind 官方博客；适合研究和应用原文，需区分研究成果与真实用户案例。"
+  },
+  {
+    "source_id": "microsoft_ai",
+    "name": "Microsoft AI / Source",
+    "kind": "official_site",
+    "url": "https://news.microsoft.com/source/topics/ai/",
+    "alternate_urls": [
+      "https://blogs.microsoft.com/ai/"
+    ],
+    "topics": [
+      "copilot",
+      "agent",
+      "work",
+      "customer-story"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "微软官方 AI 频道含 Customers 与 Work & Life 分类，适合企业和个人工作流案例。"
+  },
+  {
+    "source_id": "meta_ai_blog",
+    "name": "AI at Meta Blog",
+    "kind": "official_site",
+    "url": "https://ai.meta.com/blog/",
+    "alternate_urls": [],
+    "topics": [
+      "open-source",
+      "research",
+      "agent",
+      "application"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "Meta 官方 AI 博客；适合开源模型、研究与应用原文。"
+  },
+  {
+    "source_id": "openai_x",
+    "name": "OpenAI 官方 X",
+    "kind": "official_social",
+    "url": "https://x.com/OpenAI",
+    "alternate_urls": [],
+    "match_path": "/OpenAI",
+    "topics": [
+      "announcement",
+      "product",
+      "agent"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_social",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "官方社交账号适合发现发布线索；帖子本身不作为完整案例证据。"
+  },
+  {
+    "source_id": "anthropic_x",
+    "name": "Anthropic 官方 X",
+    "kind": "official_social",
+    "url": "https://x.com/AnthropicAI",
+    "alternate_urls": [],
+    "match_path": "/AnthropicAI",
+    "topics": [
+      "announcement",
+      "claude",
+      "agent"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_social",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "官方社交账号适合发现发布线索；需要回溯官方长文或客户原文。"
+  },
+  {
+    "source_id": "google_deepmind_x",
+    "name": "Google DeepMind 官方 X",
+    "kind": "official_social",
+    "url": "https://x.com/GoogleDeepMind",
+    "alternate_urls": [],
+    "match_path": "/GoogleDeepMind",
+    "topics": [
+      "research",
+      "announcement",
+      "agent"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_social",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "官方社交账号适合发现研究与产品线索；帖子本身不承担完整证据。"
+  },
+  {
+    "source_id": "qwen_x",
+    "name": "Qwen 官方 X",
+    "kind": "official_social",
+    "url": "https://x.com/Alibaba_Qwen",
+    "alternate_urls": [],
+    "match_path": "/Alibaba_Qwen",
+    "topics": [
+      "qwen",
+      "model",
+      "agent",
+      "open-source"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "official_social",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "Qwen 官方社交账号适合发现模型和工具发布；需要回溯文档或仓库。"
+  },
+  {
+    "source_id": "simon_willison",
+    "name": "Simon Willison Blog",
+    "kind": "practitioner",
+    "url": "https://simonwillison.net/",
+    "alternate_urls": [
+      "https://til.simonwillison.net/"
+    ],
+    "topics": [
+      "agentic-engineering",
+      "llm",
+      "tools",
+      "workflow",
+      "coding"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "practitioner",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "长期记录 AI 工具实际使用与工程实验；适合个人实践案例和可复现步骤。"
+  },
+  {
+    "source_id": "one_useful_thing",
+    "name": "Ethan Mollick · One Useful Thing",
+    "kind": "practitioner",
+    "url": "https://www.oneusefulthing.org/",
+    "alternate_urls": [],
+    "topics": [
+      "work",
+      "education",
+      "productivity",
+      "everyday-use"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "practitioner",
+    "source_role": "primary",
+    "evidence_policy": "eligible",
+    "search_enabled": true,
+    "why": "长期研究和记录 AI 在工作生活中的实际用法；需要优先选择含过程和结果的文章。"
+  },
+  {
+    "source_id": "latent_space",
+    "name": "Latent Space",
+    "kind": "analysis",
+    "url": "https://www.latent.space/",
+    "alternate_urls": [],
+    "topics": [
+      "agent",
+      "developer",
+      "model",
+      "industry"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "analysis",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "业内访谈与技术分析，适合发现项目和作者线索；案例必须回溯一手材料。"
+  },
+  {
+    "source_id": "mit_technology_review_ai",
+    "name": "MIT Technology Review · AI",
+    "kind": "professional_media",
+    "url": "https://www.technologyreview.com/topic/artificial-intelligence/",
+    "alternate_urls": [],
+    "topics": [
+      "ai",
+      "society",
+      "product",
+      "work"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "professional_media",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "专业媒体适合发现重要案例；报道只能作为线索，需回溯企业、作者或官方原文。"
+  },
+  {
+    "source_id": "the_verge_ai",
+    "name": "The Verge · AI",
+    "kind": "professional_media",
+    "url": "https://www.theverge.com/ai-artificial-intelligence",
+    "alternate_urls": [],
+    "topics": [
+      "product",
+      "consumer",
+      "work",
+      "ai"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "professional_media",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "专业科技媒体适合发现产品使用和行业案例；不直接授予真实性或效果分。"
+  },
+  {
+    "source_id": "techcrunch_ai",
+    "name": "TechCrunch · AI",
+    "kind": "professional_media",
+    "url": "https://techcrunch.com/category/artificial-intelligence/",
+    "alternate_urls": [],
+    "topics": [
+      "startup",
+      "product",
+      "agent",
+      "business"
+    ],
+    "enabled": true,
+    "requires_credentials": false,
+    "source_class": "professional_media",
+    "source_role": "discovery",
+    "evidence_policy": "requires_original_link",
+    "search_enabled": true,
+    "why": "创业与产品媒体适合发现项目线索；需要回溯原始公告、仓库或用户文章。"
+  }
+]

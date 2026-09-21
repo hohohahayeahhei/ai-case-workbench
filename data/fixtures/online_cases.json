@@ -1,0 +1,65 @@
+[
+  {
+    "case_id": "online_microsoft_ask",
+    "title_original": "Microsoft 用 Copilot Studio 编排 Ask Microsoft 多子 Agent",
+    "source_url": "https://www.microsoft.com/en/customers/story/26166-microsoft-microsoft-copilot-studio/",
+    "source_type": "official_customer_story",
+    "published_at": "2026-02-27",
+    "problem": {
+      "claim": "Microsoft.com 内容和流量增长后，原有网站助手响应变慢，销售人员也被大量非销售问题占用",
+      "evidence": "Microsoft Customer Story 说明网站覆盖数千页面，原有架构受到流量和知识源扩张带来的延迟压力。"
+    },
+    "approach": {
+      "claim": "按 Azure、Microsoft 365、定价等知识范围拆分专门子 Agent，由生成式编排动态选择并组合响应",
+      "evidence": "页面第 48-63 行描述了多个 child agents、生成式编排，以及跨产品和定价 Agent 的协同。"
+    },
+    "outcome": {
+      "claim": "测试中响应延迟最高降低 61%，人工处理聊天量最高减少 70%",
+      "evidence": "页面第 85-89 行明确给出 61% lower latency 和 up to 70% reduction in human-handled chat volume。"
+    },
+    "limitations": ["企业自报案例，指标口径和实验设计未完整披露"],
+    "source_verified_at": "2026-09-09"
+  },
+  {
+    "case_id": "online_gradient_labs",
+    "title_original": "Gradient Labs 用 Claude 自动化金融客服复杂问题",
+    "source_url": "https://claude.com/customers/gradient-labs",
+    "source_type": "official_customer_story",
+    "published_at": "2025-01-01",
+    "problem": {
+      "claim": "金融机构客服自动化如果只覆盖简单问答，自动化比例高也未必带来端到端运营价值",
+      "evidence": "Anthropic 案例说明金融客服需要处理复杂问题，并强调受监管环境下的合规和可靠性。"
+    },
+    "approach": {
+      "claim": "使用 Claude 结合 Gradient Labs 知识图谱和标准操作流程处理复杂客服请求",
+      "evidence": "页面说明 Claude 分析客户请求并结合 Gradient Labs knowledge graph 判断处理路径。"
+    },
+    "outcome": {
+      "claim": "客户支持自动化达到 80–90% resolution rates，客户满意度最高达到 98%",
+      "evidence": "Anthropic 案例第 229-231 行给出 80-90% resolution rates 和最高 98% customer satisfaction。"
+    },
+    "limitations": ["案例未披露完整样本、基线和长期效果"],
+    "source_verified_at": "2026-09-09"
+  },
+  {
+    "case_id": "online_notion_agents",
+    "title_original": "Notion 在任务板中编排 Claude Managed Agents",
+    "source_url": "https://claude.com/customers/notion",
+    "source_type": "official_customer_story",
+    "published_at": "2026-01-01",
+    "problem": {
+      "claim": "团队希望把编码、客户交付物等开放式复杂任务直接交给 Agent，并保留工作区上下文",
+      "evidence": "Anthropic 案例说明 Notion 将任务板、连接页面、设计系统、API 文档和产品需求作为 Agent 工作上下文。"
+    },
+    "approach": {
+      "claim": "在任务板中触发 Claude Managed Agents，支持长会话、记忆和跨文件产出",
+      "evidence": "页面第 258-263 行描述了 ready to start 状态、长运行 session、memory，以及代码、演示文稿和表格等产出。"
+    },
+    "outcome": {
+      "claim": "单个任务板可以并行启动 30+ 个 Agent tasks",
+      "evidence": "Notion 案例页面摘要明确标注 30+ concurrent agent tasks from a single task board。"
+    },
+    "limitations": ["企业案例中的规模和成本结果不能直接外推到本项目"],
+    "source_verified_at": "2026-09-09"
+  }
+]

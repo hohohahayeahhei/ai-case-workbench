@@ -1,0 +1,9 @@
+.recovery-banner{border-color:#b27c47;background:linear-gradient(120deg,#352a1c,#1a1e1e)}
+.eval-note{background:#0d151f;border:1px solid #24364a;border-radius:8px;padding:12px 14px;color:#9baabd;font-size:12px;line-height:1.6;margin-bottom:18px}
+.eval-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.eval-table{border-top:1px solid #223144}
+.eval-row{display:grid;grid-template-columns:130px 100px 120px 120px 1fr;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #1d2938;font-size:11px;color:#9ba9ba}
+.eval-row code{font:11px 'DM Mono';color:#d7e0ea}
+.eval-row small{color:#71829b}
+.good-text{color:#9bf07d}
+.bad-text{color:#f2a99d}
