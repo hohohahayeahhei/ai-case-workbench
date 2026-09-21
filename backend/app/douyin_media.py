@@ -11,6 +11,7 @@ import math
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -70,20 +71,74 @@ def local_capabilities() -> dict[str, Any]:
             "automatic_model_download": False, "visual_review": "manual_timestamped_observation"}
 
 
-def probe_media(path: Path, timeout: int = 20) -> dict[str, Any]:
-    ffprobe = shutil.which("ffprobe")
-    if not ffprobe:
-        return {"duration_seconds": None, "probe_status": "ffprobe_unavailable"}
+def _probe_input(path: Path) -> tuple[Path, str]:
+    """Only probe recognized local media, never a URL or a playlist file."""
     try:
-        result = subprocess.run([ffprobe, "-v", "error", "-protocol_whitelist", "file,pipe",
-                                 "-show_entries", "format=duration:stream=codec_type,width,height",
-                                 "-of", "json", str(path)], capture_output=True, timeout=timeout, check=True)
-        payload = json.loads(result.stdout[:100_000])
-        duration = float(payload.get("format", {}).get("duration", 0)) or None
-        if duration is not None and (not math.isfinite(duration) or duration > MAX_MEDIA_SECONDS):
-            raise MediaError("素材超过 30 分钟处理上限或时长无效")
-        return {"duration_seconds": duration, "probe_status": "verified", "streams": payload.get("streams", [])[:8]}
-    except (subprocess.SubprocessError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > MAX_UPLOAD_BYTES:
+            raise MediaError("素材必须是本地文件，且不能超过 200 MiB")
+        with path.open("rb") as source:
+            extension, mime_type = detect_media(source.read(32))
+        if mime_type.startswith("image/"):
+            raise MediaError("图片没有可验证的音视频时长")
+        formats = {".mp4": "mov", ".m4a": "mov", ".wav": "wav", ".mp3": "mp3",
+                   ".flac": "flac", ".ogg": "ogg", ".webm": "matroska"}
+        return path.resolve(strict=True), formats[extension]
+    except (OSError, KeyError):
+        raise MediaError("本地素材不存在或无法读取，不能验证时长") from None
+
+
+def _probe_pyav(path: Path, media_format: str, timeout: int) -> dict[str, Any]:
+    try:
+        available = importlib.util.find_spec("av") is not None
+    except (ImportError, ValueError):
+        available = False
+    if not available:
+        raise MediaError("本机没有 ffprobe 或 PyAV，无法验证素材时长；请配置本地媒体解析依赖后重试")
+    # Open a file object with an explicitly detected demuxer. The protocol
+    # whitelist also prevents embedded references from opening files or URLs.
+    # A subprocess bounds slow/corrupt-container inspection independently of ASR.
+    script = """import json,sys
+import av
+with open(sys.argv[1], 'rb') as source:
+ with av.open(source,mode='r',format=sys.argv[2],options={'protocol_whitelist':'pipe','probesize':'5000000','analyzeduration':'5000000'}) as container:
+  durations=[]
+  if container.duration is not None: durations.append(float(container.duration/av.time_base))
+  streams=[]
+  for stream in container.streams:
+   if stream.type not in ('audio','video'): continue
+   if stream.duration is not None and stream.time_base is not None:
+    durations.append(float(stream.duration*stream.time_base))
+   if len(streams)<8:
+    entry={'codec_type':stream.type}
+    if stream.type=='video': entry.update(width=stream.width,height=stream.height)
+    streams.append(entry)
+  print(json.dumps({'format':{'duration':max(durations) if durations else None},'streams':streams}))
+"""
+    result = subprocess.run([sys.executable, "-c", script, str(path), media_format],
+                            capture_output=True, timeout=timeout, check=True)
+    return json.loads(result.stdout[:100_000])
+
+
+def probe_media(path: Path, timeout: int = 20) -> dict[str, Any]:
+    path, media_format = _probe_input(Path(path))
+    ffprobe = shutil.which("ffprobe")
+    try:
+        if ffprobe:
+            result = subprocess.run([ffprobe, "-v", "error", "-protocol_whitelist", "file,pipe",
+                                     "-show_entries", "format=duration:stream=codec_type,width,height",
+                                     "-of", "json", str(path)], capture_output=True, timeout=timeout, check=True)
+            payload = json.loads(result.stdout[:100_000])
+        else:
+            payload = _probe_pyav(path, media_format, timeout)
+        value = payload.get("format", {}).get("duration")
+        duration = float(value) if value is not None else 0
+        if not math.isfinite(duration) or duration <= 0:
+            raise MediaError("无法验证有效的素材时长；请重新导出完整音视频后重试")
+        if duration > MAX_MEDIA_SECONDS:
+            raise MediaError("素材超过 30 分钟处理上限")
+        return {"duration_seconds": duration, "probe_status": "verified", "probe_engine": "ffprobe" if ffprobe else "pyav",
+                "streams": payload.get("streams", [])[:8]}
+    except (subprocess.SubprocessError, OSError, json.JSONDecodeError, TypeError, ValueError, AttributeError) as exc:
         if isinstance(exc, MediaError):
             raise
         # Do not surface raw subprocess output, which may contain paths or data.
@@ -153,7 +208,6 @@ def transcribe_local(path: Path, mime_type: str, timeout: int = 180) -> tuple[li
                 raise MediaError("本地 whisper.cpp 转写失败或超时；原始素材已保留，可修复后续跑") from None
     # Run the optional Python engine in a subprocess so its timeout is enforceable.
     # local_files_only prevents package defaults from downloading models.
-    import sys
     script = """import json,sys
 from faster_whisper import WhisperModel
 m=WhisperModel(sys.argv[1],device='cpu',compute_type='int8',local_files_only=True)

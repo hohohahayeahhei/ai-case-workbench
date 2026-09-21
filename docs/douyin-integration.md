@@ -58,6 +58,20 @@
 
 本机没有配置可用转写运行时/模型时会明确报 `transcription_failed`，不会将音频发往未经验证的文本模型网关。浏览器登录、访问限制和素材取得仍是独立于代码测试的现实依赖。
 
+### 配置本地中文转写
+
+在运行后端的同一个 Python 虚拟环境安装可选依赖：
+
+```sh
+.venv/bin/python -m pip install 'faster-whisper==1.2.1'
+```
+
+另行下载官方 [Systran/faster-whisper-base 模型](https://huggingface.co/Systran/faster-whisper-base)，保留 `model.bin`、`config.json`、`tokenizer.json`、`vocabulary.txt`，放在 Git 忽略的本地运行目录。在本地 `.env` 中将 `DOUYIN_FASTER_WHISPER_MODEL` 设置为模型目录的绝对路径，再重启后端。转写器只加载本地模型，不会在点击处理时自动下载权重。模型与 faster-whisper 的许可证均为 MIT，PyAV 为 BSD-3-Clause；本项目不包含这些依赖的二进制或模型权重。
+
+faster-whisper 通过其 PyAV 依赖读取本地音视频，无需系统 `ffmpeg`。时长探测优先使用 `ffprobe`，没有时使用限时 PyAV 子进程；无法确认时长、超过 30 分钟或伪装的播放列表均拒绝处理。也可配置 `DOUYIN_WHISPER_CPP_BIN` 与 `DOUYIN_WHISPER_CPP_MODEL` 使用 whisper.cpp；该分支需要系统 `ffmpeg` 转换音频。
+
+上传素材后点击本地转写，成功结果仍标为未逐句核对的机器证据。先核对专有名词与关键画面，再提交案例审核；仅完成转写不会自动入选。
+
 ## 验证与上游代码
 
 新增受控测试覆盖：抖音搜索命中路由、重复执行不入库/不重评、真实 SQLite 适配器到既有四模型阶段的契约、口述结果拦截、日期缺失拦截、模型故障冷却、小批量总预算、来源失败隔离、MCP 只读且不创建浏览器任务。受控模型返回值与受控证据只验证工程边界，不算真实案例或真实转写成功。
